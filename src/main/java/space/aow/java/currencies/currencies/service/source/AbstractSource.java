@@ -1,6 +1,6 @@
-package space.aow.java.currencies.currencies.Services.Parser.Sources;
+package space.aow.java.currencies.currencies.service.source;
 
-import space.aow.java.currencies.currencies.Services.Parser.Models.Currency;
+import space.aow.java.currencies.currencies.model.Currency;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -41,7 +41,7 @@ public abstract class AbstractSource implements Source {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            throw new Exception("Error: Source loading were unsuccessful. Status code: " + String.valueOf(response.statusCode()) + ";\nRequest body:\n" + response.body());
+            throw new Exception("Error: Source loading were unsuccessful. Status code: " + response.statusCode() + ";\nRequest body:\n" + response.body());
         }
 
         rawData = response.body();

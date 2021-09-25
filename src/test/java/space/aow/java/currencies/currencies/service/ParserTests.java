@@ -1,9 +1,10 @@
-package space.aow.java.currencies.currencies.Services.Parser;
+package space.aow.java.currencies.currencies.service;
 
 import org.junit.jupiter.api.Test;
-import space.aow.java.currencies.currencies.Services.Parser.Models.Currency;
-import space.aow.java.currencies.currencies.Services.Parser.Sources.SberSource;
-import space.aow.java.currencies.currencies.Services.Parser.Sources.CbrSource;
+import space.aow.java.currencies.currencies.model.Currency;
+import space.aow.java.currencies.currencies.service.CurrencyParserService;
+import space.aow.java.currencies.currencies.service.source.SberSource;
+import space.aow.java.currencies.currencies.service.source.CbrSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +15,7 @@ public class ParserTests {
 
     @Test
     public void parse() throws Exception {
-        Parser parser = new Parser(Arrays.asList(
+        CurrencyParserService parser = new CurrencyParserService(Arrays.asList(
                 new SberSource("https://www.sberbank.ru/proxy/services/rates/public/actual", Arrays.asList(
                         new Currency("EUR", "Евро", 0),
                         new Currency("CAD", "Канадский доллар", 0),

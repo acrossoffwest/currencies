@@ -1,8 +1,8 @@
-package space.aow.java.currencies.currencies.Services.Parser;
+package space.aow.java.currencies.currencies.service.source;
 
 import org.junit.jupiter.api.Test;
-import space.aow.java.currencies.currencies.Services.Parser.Models.Currency;
-import space.aow.java.currencies.currencies.Services.Parser.Sources.SberSource;
+import space.aow.java.currencies.currencies.model.Currency;
+import space.aow.java.currencies.currencies.service.source.SberSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.Arrays;

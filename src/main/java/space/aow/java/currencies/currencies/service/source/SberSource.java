@@ -1,6 +1,6 @@
-package space.aow.java.currencies.currencies.Services.Parser.Sources;
+package space.aow.java.currencies.currencies.service.source;
 
-import space.aow.java.currencies.currencies.Services.Parser.Models.Currency;
+import space.aow.java.currencies.currencies.model.Currency;
 
 import java.util.List;
 import java.util.Locale;

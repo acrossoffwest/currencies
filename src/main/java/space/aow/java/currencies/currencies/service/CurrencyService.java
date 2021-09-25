@@ -1,22 +1,30 @@
-package space.aow.java.currencies.currencies.Services;
+package space.aow.java.currencies.currencies.service;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
-import space.aow.java.currencies.currencies.Services.Parser.Models.Currencies;
-import space.aow.java.currencies.currencies.Services.Parser.Models.Currency;
-import space.aow.java.currencies.currencies.Services.Parser.Parser;
-import space.aow.java.currencies.currencies.Services.Parser.Sources.CbrSource;
-import space.aow.java.currencies.currencies.Services.Parser.Sources.SberSource;
+import space.aow.java.currencies.currencies.model.Currency;
+import space.aow.java.currencies.currencies.service.source.CbrSource;
+import space.aow.java.currencies.currencies.service.source.SberSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class CurrenciesService {
-    private Parser parser;
+public class CurrencyService {
+    private final CurrencyParserService parser;
 
-    CurrenciesService() {
-        parser = new Parser(List.of(
+    CurrencyService() {
+        parser = getNewParser();
+    }
+
+    @Cacheable(value = "currencies", sync = true)
+    public List<Currency> getAll() throws Exception {
+        return parser.parse();
+    }
+
+    private CurrencyParserService getNewParser()
+    {
+        return new CurrencyParserService(List.of(
                 new SberSource("https://www.sberbank.ru/proxy/services/rates/public/actual", Arrays.asList(
                         new Currency("EUR", "Евро", 0),
                         new Currency("CAD", "Канадский доллар", 0),
@@ -32,10 +40,5 @@ public class CurrenciesService {
                         new Currency("SGD", "Сингапурский доллар", 0)
                 ))
         ));
-    }
-
-    @Cacheable(value = "currencies", sync = true)
-    public Currencies getCurrencies() throws Exception {
-        return new Currencies(parser.parse());
     }
 }

@@ -1,8 +1,8 @@
-package space.aow.java.currencies.currencies.Services.Parser;
+package space.aow.java.currencies.currencies.service.source;
 
 import org.junit.jupiter.api.Test;
-import space.aow.java.currencies.currencies.Services.Parser.Models.Currency;
-import space.aow.java.currencies.currencies.Services.Parser.Sources.CbrSource;
+import space.aow.java.currencies.currencies.model.Currency;
+import space.aow.java.currencies.currencies.service.source.CbrSource;
 
 import java.util.Arrays;
 import java.util.List;

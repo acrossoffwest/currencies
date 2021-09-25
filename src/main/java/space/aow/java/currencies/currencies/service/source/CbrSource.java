@@ -1,10 +1,10 @@
-package space.aow.java.currencies.currencies.Services.Parser.Sources;
+package space.aow.java.currencies.currencies.service.source;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import space.aow.java.currencies.currencies.Services.Parser.Models.Currency;
+import space.aow.java.currencies.currencies.model.Currency;
 
 import java.util.List;
 
