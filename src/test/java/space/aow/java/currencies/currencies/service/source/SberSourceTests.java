@@ -1,7 +1,9 @@
 package space.aow.java.currencies.currencies.service.source;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import space.aow.java.currencies.currencies.model.Currency;
+import space.aow.java.currencies.currencies.service.CurrencyService;
 import space.aow.java.currencies.currencies.service.source.SberSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -10,14 +12,17 @@ import java.util.List;
 
 public class SberSourceTests {
 
+    @Autowired
+    public CurrencyService currencyService;
+    
     @Test
     public void parse() throws Exception {
         SberSource sberSource = new SberSource("https://www.sberbank.ru/proxy/services/rates/public/actual", Arrays.asList(
-                new Currency("EUR", "Евро", 0),
-                new Currency("CAD", "Канадский доллар", 0),
-                new Currency("USD", "Доллар США", 0),
-                new Currency("GBP", "Фунт стерлингов", 0),
-                new Currency("JPY", "Японская иена", 0)
+                currencyService.currencyWithDefaultExchange("EUR", "Евро"),
+                currencyService.currencyWithDefaultExchange("CAD", "Канадский доллар"),
+                currencyService.currencyWithDefaultExchange("USD", "Доллар США"),
+                currencyService.currencyWithDefaultExchange("GBP", "Фунт стерлингов"),
+                currencyService.currencyWithDefaultExchange("JPY", "Японская иена")
         ));
 
         List<Currency> currencies;
@@ -25,7 +30,7 @@ public class SberSourceTests {
 
         for (Currency currency: currencies) {
             assertThat(currency).isNotNull();
-            assertThat(currency.getExchange()).isGreaterThan(0);
+            assertThat(currency.getExchanges().get(0).getAmount()).isGreaterThan(0);
         }
     }
 }

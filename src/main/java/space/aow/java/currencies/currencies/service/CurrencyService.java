@@ -3,9 +3,12 @@ package space.aow.java.currencies.currencies.service;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import space.aow.java.currencies.currencies.model.Currency;
+import space.aow.java.currencies.currencies.model.Exchange;
 import space.aow.java.currencies.currencies.service.source.CbrSource;
 import space.aow.java.currencies.currencies.service.source.SberSource;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,19 +29,24 @@ public class CurrencyService {
     {
         return new CurrencyParserService(List.of(
                 new SberSource("https://www.sberbank.ru/proxy/services/rates/public/actual", Arrays.asList(
-                        new Currency("EUR", "Евро", 0),
-                        new Currency("CAD", "Канадский доллар", 0),
-                        new Currency("USD", "Доллар США", 0),
-                        new Currency("GBP", "Фунт стерлингов", 0),
-                        new Currency("JPY", "Японская иена", 0)
+                        currencyWithDefaultExchange("EUR", "Евро"),
+                        currencyWithDefaultExchange("CAD", "Канадский доллар"),
+                        currencyWithDefaultExchange("USD", "Доллар США"),
+                        currencyWithDefaultExchange("GBP", "Фунт стерлингов"),
+                        currencyWithDefaultExchange("JPY", "Японская иена")
                 )),
                 new CbrSource("https://www.cbr.ru/currency_base/daily/", Arrays.asList(
-                        new Currency("PLN", "Польский злотый", 0),
-                        new Currency("CHF", "Швейцарский франк", 0),
-                        new Currency("RON", "Румынский лей", 0),
-                        new Currency("CNY", "Китайский юань", 0),
-                        new Currency("SGD", "Сингапурский доллар", 0)
+                        currencyWithDefaultExchange("PLN", "Польский злотый"),
+                        currencyWithDefaultExchange("CHF", "Швейцарский франк"),
+                        currencyWithDefaultExchange("RON", "Румынский лей"),
+                        currencyWithDefaultExchange("CNY", "Китайский юань"),
+                        currencyWithDefaultExchange("SGD", "Сингапурский доллар")
                 ))
         ));
+    }
+    
+    public Currency currencyWithDefaultExchange(String code, String name)
+    {
+        return new Currency(code, name, List.of(new Exchange(0, new Timestamp(System.currentTimeMillis()))));
     }
 }

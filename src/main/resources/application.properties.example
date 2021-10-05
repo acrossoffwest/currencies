@@ -1,0 +1,6 @@
+springdoc.api-docs.path=/api-docs
+
+spring.rabbitmq.host=
+spring.rabbitmq.password=
+spring.rabbitmq.port=
+spring.rabbitmq.username=

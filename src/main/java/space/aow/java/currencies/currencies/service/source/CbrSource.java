@@ -5,7 +5,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import space.aow.java.currencies.currencies.model.Currency;
+import space.aow.java.currencies.currencies.model.Exchange;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CbrSource extends  AbstractSource implements Source{
@@ -27,7 +30,10 @@ public class CbrSource extends  AbstractSource implements Source{
                 if (!currency.getCode().equals(currencyCellsElements.get(1).text())) {
                     continue;
                 }
-                currency.setExchange(Double.parseDouble(currencyCellsElements.get(4).text().replace(',', '.')));
+                List<Exchange> exchanges = new ArrayList<>();
+                Exchange exchange = new Exchange(Double.parseDouble(currencyCellsElements.get(4).text().replace(',', '.')), new Timestamp(System.currentTimeMillis()));
+                exchanges.add(exchange);
+                currency.setExchanges(exchanges);
             }
         }
 
