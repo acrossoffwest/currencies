@@ -9,7 +9,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 
 public abstract class AbstractSource implements Source {
-    private URI uri;
+    protected URI uri;
     protected String rawData;
     protected List<Currency> currencies;
 
@@ -23,8 +23,13 @@ public abstract class AbstractSource implements Source {
         return this;
     }
 
-    public String getUri() {
-        return uri.toString();
+    public Source setUri(URI uri) {
+        this.uri = uri;
+        return this;
+    }
+
+    public URI getUri() {
+        return uri;
     }
 
     public Source setCurrencies(List<Currency> currencies) {
@@ -32,21 +37,15 @@ public abstract class AbstractSource implements Source {
         return this;
     }
 
-    public Source loadRawData() throws Exception {
-        HttpClient client = HttpClient.newBuilder().build();
-        HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .uri(this.uri)
-                .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        if (response.statusCode() != 200) {
-            throw new Exception("Error: Source loading were unsuccessful. Status code: " + response.statusCode() + ";\nRequest body:\n" + response.body());
-        }
-
-        rawData = response.body();
-
+    @Override
+    public Source setRawData(String rawData) {
+        this.rawData = rawData;
         return this;
+    }
+
+    @Override
+    public String getRawData() {
+        return rawData;
     }
 
     public abstract List<Currency> parseCurrencies();

@@ -2,6 +2,7 @@ package space.aow.java.currencies.currencies.service.source;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import space.aow.java.currencies.currencies.model.Currency;
 import space.aow.java.currencies.currencies.service.CurrencyService;
 import space.aow.java.currencies.currencies.service.source.CbrSource;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@SpringBootTest
 public class CbrSourceTests {
 
     @Autowired

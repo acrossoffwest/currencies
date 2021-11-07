@@ -10,7 +10,7 @@ import java.util.Locale;
 import org.json.*;
 import space.aow.java.currencies.currencies.model.Exchange;
 
-public class SberSource extends  AbstractSource implements Source{
+public class SberSource extends  AbstractSource implements Source {
 
     public SberSource(String uri, List<Currency> currencies) {
         super(uri, currencies);
@@ -18,7 +18,7 @@ public class SberSource extends  AbstractSource implements Source{
 
     @Override
     public Source loadRawData() throws Exception {
-        String uriStr = replaceGetParams(getUri());
+        String uriStr = replaceGetParams(getUri().toString());
         StringBuilder uri = new StringBuilder(uriStr);
         uri.append("?rateType=ERNP-2");
 

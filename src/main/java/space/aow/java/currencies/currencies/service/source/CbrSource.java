@@ -16,6 +16,8 @@ public class CbrSource extends  AbstractSource implements Source{
         super(uri, currencies);
     }
 
+
+
     @Override
     public List<Currency> parseCurrencies() {
         Document doc = Jsoup.parse(rawData);

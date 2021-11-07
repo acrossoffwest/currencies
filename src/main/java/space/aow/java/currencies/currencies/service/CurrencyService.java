@@ -8,7 +8,6 @@ import space.aow.java.currencies.currencies.service.source.CbrSource;
 import space.aow.java.currencies.currencies.service.source.SberSource;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
